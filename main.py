@@ -1,5 +1,11 @@
-from modules.ai.client import ask_groq
+from modules.news.collector import collect_news
+from modules.ai.processor import process_article
+from modules.poster.generator import generate_poster
 
-response = ask_groq("Reply with only one word: Namaste")
+news = collect_news()
 
-print(response)
+article = news["politics"]
+
+result = process_article(article, "politics")
+
+generate_poster(result)
