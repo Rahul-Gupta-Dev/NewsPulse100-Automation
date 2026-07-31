@@ -26,10 +26,10 @@ def collect_news():
 
     for category, query in CATEGORIES.items():
 
-        news = fetch_news(query, limit=1)
+        news = fetch_news(query, limit=10)
 
         if news:
-            collected[category] = clean_article(news[0])
+            collected[category] = [clean_article(n) for n in news]
 
         else:
             collected[category] = {

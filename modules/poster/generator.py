@@ -1,46 +1,30 @@
-from PIL import Image, ImageDraw, ImageFont
-from datetime import datetime
+import os
+
+from modules.poster.renderer import render_poster
 
 
-def generate_poster(data, output_path="poster.png"):
+def generate_poster(
+    headline,
+    summary,
+    category,
+    image_path="output/news_image.jpg",
+    output_path="output/poster.png"
+):
 
-    WIDTH = 1080
-    HEIGHT = 1350
+    if not os.path.exists(image_path):
+        raise FileNotFoundError(image_path)
 
-    img = Image.new("RGB", (WIDTH, HEIGHT), "#ffffff")
-    draw = ImageDraw.Draw(img)
-
-    try:
-        title_font = ImageFont.truetype("fonts/NotoSansDevanagari-Regular.ttf", 60)
-text_font = ImageFont.truetype("fonts/NotoSansDevanagari-Regular.ttf", 38)
-    except:
-        title_font = ImageFont.load_default()
-        text_font = ImageFont.load_default()
-
-    # Header
-    draw.rectangle((0, 0, WIDTH, 120), fill="#d32f2f")
-    draw.text((40, 30), "NewsPulse100", fill="white", font=title_font)
-
-    # Date
-    today = datetime.now().strftime("%d %b %Y")
-    draw.text((40, 150), today, fill="black", font=text_font)
-
-    # Headline
-    draw.text(
-        (40, 250),
-        data["poster_headline"],
-        fill="black",
-        font=title_font
+    poster = render_poster(
+        image_path=image_path,
+        headline=headline,
+        summary=summary,
+        category=category
     )
 
-    # Summary
-    draw.text(
-        (40, 420),
-        data["summary_hindi"],
-        fill="#333333",
-        font=text_font
+    poster.save(
+        output_path,
+        quality=100
     )
 
-    img.save(output_path)
-
-    print("✅ Poster saved:", output_path)
+    print(f"✅ Poster Saved : {output_path}")
+    return output_path
