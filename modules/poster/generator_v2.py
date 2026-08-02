@@ -16,7 +16,8 @@ from modules.poster.effects import (
 from modules.poster.text import (
     wrap_text,
     draw_stroke_text,
-    get_font
+    get_hindi_font,
+    get_english_font
 )
 
 
@@ -255,7 +256,47 @@ def prepare_background(
 
     return img
 
-  # -----------------------------
+import re
+
+# -----------------------------
+# MIXED TEXT
+# -----------------------------
+
+def draw_mixed_text(draw, position, text, hindi_font, english_font,
+                    fill, stroke_fill=None, stroke=0):
+
+    x, y = position
+
+    parts = re.findall(r"[A-Za-z0-9#@._+-]+|[^A-Za-z0-9#@._+-]+", text)
+
+    for part in parts:
+
+        font = english_font if re.search(r"[A-Za-z0-9]", part) else hindi_font
+
+        if stroke > 0:
+            for dx in range(-stroke, stroke + 1):
+                for dy in range(-stroke, stroke + 1):
+                    if dx == 0 and dy == 0:
+                        continue
+                    draw.text(
+                        (x + dx, y + dy),
+                        part,
+                        font=font,
+                        fill=stroke_fill
+                    )
+
+        draw.text(
+            (x, y),
+            part,
+            font=font,
+            fill=fill
+        )
+
+        x += draw.textlength(part, font=font)
+
+      
+
+# -----------------------------
 # HEADLINE
 # -----------------------------
 
@@ -264,11 +305,11 @@ def draw_headline(canvas, headline):
     draw = ImageDraw.Draw(canvas)
 
     parts = wrap_text(
-        headline,
-        get_font(82, True),
-        WIDTH - 120,
-        draw
-    )
+    headline,
+    get_hindi_font(82, True),
+    WIDTH - 120,
+    draw
+)
 
     if len(parts) == 1:
         white_lines = parts
@@ -279,8 +320,9 @@ def draw_headline(canvas, headline):
 
     y = 770
 
-    white_font = get_font(82, True)
-    yellow_font = get_font(88, True)
+    white_font = get_hindi_font(82, True)
+    yellow_font = get_hindi_font(88, True)
+    
 
     for line in white_lines:
 
@@ -291,11 +333,12 @@ def draw_headline(canvas, headline):
 
         x = (WIDTH - w) / 2
 
-        draw_stroke_text(
+        draw_mixed_text(
             draw,
             (x, y),
             line,
-            white_font,
+            get_hindi_font(82, True),
+            get_english_font(82, True),
             fill=WHITE,
             stroke_fill=BLACK,
             stroke=4
@@ -312,14 +355,15 @@ def draw_headline(canvas, headline):
 
         x = (WIDTH - w) / 2
 
-        draw_stroke_text(
-            draw,
-            (x, y),
-            line,
-            yellow_font,
-            fill=YELLOW,
-            stroke_fill=BLACK,
-            stroke=4
+        draw_mixed_text(
+    draw,
+    (x, y),
+    line,
+    get_hindi_font(88, True),
+    get_english_font(88, True),
+    fill=YELLOW,
+    stroke_fill=BLACK,
+    stroke=4
         )
 
         y += 100
@@ -350,7 +394,7 @@ def draw_summary(
 
     draw = ImageDraw.Draw(canvas)
 
-    font = get_font(36)
+    font = get_hindi_font(36)
 
     lines = wrap_text(
         summary,
@@ -370,12 +414,16 @@ def draw_summary(
 
         x = (WIDTH - w) / 2
 
-        draw.text(
-            (x, y),
-            line,
-            font=font,
-            fill=LIGHT
-        )
+        draw_mixed_text(
+    draw,
+    (x, y),
+    line,
+    get_hindi_font(36),
+    get_english_font(36),
+    fill=LIGHT,
+    stroke_fill=BLACK,
+    stroke=2
+)
 
         y += 46
 

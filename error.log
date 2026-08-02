@@ -1,0 +1,317 @@
+Traceback (most recent call last):
+  File "/data/data/com.termux/files/home/NewsPulse100-Automation/main.py", line 36, in <module>
+    best_index = select_best_news(news_list)
+  File "/data/data/com.termux/files/home/NewsPulse100-Automation/modules/news/select_best.py", line 18, in select_best_news
+    prompt += f"\n{i}. {news['title']}"
+                        ~~~~^^^^^^^^^
+TypeError: string indices must be integers, not 'str'
+
+==================================================
+Traceback (most recent call last):
+  File "/data/data/com.termux/files/home/NewsPulse100-Automation/main.py", line 36, in <module>
+    best_index = select_best_news(news_list)
+  File "/data/data/com.termux/files/home/NewsPulse100-Automation/modules/news/select_best.py", line 18, in select_best_news
+    prompt += f"\n{i}. {news['title']}"
+                        ~~~~^^^^^^^^^
+TypeError: string indices must be integers, not 'str'
+
+==================================================
+Traceback (most recent call last):
+  File "/data/data/com.termux/files/home/NewsPulse100-Automation/main.py", line 71, in <module>
+    seo = generate_seo(
+        result["headline_hindi"],
+        result["summary_hindi"],
+        category
+    )
+  File "/data/data/com.termux/files/home/NewsPulse100-Automation/modules/seo/generator.py", line 70, in generate_seo
+    return json.loads(text)
+           ~~~~~~~~~~^^^^^^
+  File "/data/data/com.termux/files/usr/lib/python3.13/json/__init__.py", line 352, in loads
+    return _default_decoder.decode(s)
+           ~~~~~~~~~~~~~~~~~~~~~~~^^^
+  File "/data/data/com.termux/files/usr/lib/python3.13/json/decoder.py", line 345, in decode
+    obj, end = self.raw_decode(s, idx=_w(s, 0).end())
+               ~~~~~~~~~~~~~~~^^^^^^^^^^^^^^^^^^^^^^^
+  File "/data/data/com.termux/files/usr/lib/python3.13/json/decoder.py", line 361, in raw_decode
+    obj, end = self.scan_once(s, idx)
+               ~~~~~~~~~~~~~~^^^^^^^^
+json.decoder.JSONDecodeError: Invalid control character at: line 14 column 12 (char 311)
+
+==================================================
+Traceback (most recent call last):
+  File "/data/data/com.termux/files/home/NewsPulse100-Automation/main.py", line 53, in <module>
+    poster_path = generate_poster(
+        headline=result["poster_headline"],
+    ...<3 lines>...
+        output_path=str(poster_path)
+    )
+  File "/data/data/com.termux/files/home/NewsPulse100-Automation/modules/poster/generator_v2.py", line 446, in generate_poster
+    y = draw_headline(
+        bg,
+        headline
+    )
+  File "/data/data/com.termux/files/home/NewsPulse100-Automation/modules/poster/generator_v2.py", line 309, in draw_headline
+    get_font(82, True),
+    ^^^^^^^^
+NameError: name 'get_font' is not defined
+
+==================================================
+Traceback (most recent call last):
+  File "/data/data/com.termux/files/home/NewsPulse100-Automation/main.py", line 53, in <module>
+    poster_path = generate_poster(
+        headline=result["poster_headline"],
+    ...<3 lines>...
+        output_path=str(poster_path)
+    )
+  File "/data/data/com.termux/files/home/NewsPulse100-Automation/modules/poster/generator_v2.py", line 452, in generate_poster
+    draw_summary(
+    ~~~~~~~~~~~~^
+        bg,
+        ^^^
+        summary,
+        ^^^^^^^^
+        y + 20
+        ^^^^^^
+    )
+    ^
+  File "/data/data/com.termux/files/home/NewsPulse100-Automation/modules/poster/generator_v2.py", line 422, in draw_summary
+    get_english_font(36),
+    ~~~~~~~~~~~~~~~~^^^^
+  File "/data/data/com.termux/files/home/NewsPulse100-Automation/modules/poster/text.py", line 34, in get_english_font
+    return ImageFont.truetype(
+           ~~~~~~~~~~~~~~~~~~^
+        "fonts/DejaVuSans.ttf",
+        ^^^^^^^^^^^^^^^^^^^^^^^
+        size
+        ^^^^
+    )
+    ^
+  File "/data/data/com.termux/files/usr/lib/python3.13/site-packages/PIL/ImageFont.py", line 864, in truetype
+    return freetype(font)
+  File "/data/data/com.termux/files/usr/lib/python3.13/site-packages/PIL/ImageFont.py", line 861, in freetype
+    return FreeTypeFont(font, size, index, encoding, layout_engine)
+  File "/data/data/com.termux/files/usr/lib/python3.13/site-packages/PIL/ImageFont.py", line 277, in __init__
+    self.font = core.getfont(
+                ~~~~~~~~~~~~^
+        font, size, index, encoding, layout_engine=layout_engine
+        ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+    )
+    ^
+OSError: cannot open resource
+
+==================================================
+Traceback (most recent call last):
+  File "/data/data/com.termux/files/home/NewsPulse100-Automation/main.py", line 31, in <module>
+    if is_duplicate(best_news["title"]):
+       ~~~~~~~~~~~~^^^^^^^^^^^^^^^^^^^^
+  File "/data/data/com.termux/files/home/NewsPulse100-Automation/modules/news/deduplicate.py", line 13, in is_duplicate
+    history = json.loads(DB.read_text())
+  File "/data/data/com.termux/files/usr/lib/python3.13/json/__init__.py", line 352, in loads
+    return _default_decoder.decode(s)
+           ~~~~~~~~~~~~~~~~~~~~~~~^^^
+  File "/data/data/com.termux/files/usr/lib/python3.13/json/decoder.py", line 345, in decode
+    obj, end = self.raw_decode(s, idx=_w(s, 0).end())
+               ~~~~~~~~~~~~~~~^^^^^^^^^^^^^^^^^^^^^^^
+  File "/data/data/com.termux/files/usr/lib/python3.13/json/decoder.py", line 361, in raw_decode
+    obj, end = self.scan_once(s, idx)
+               ~~~~~~~~~~~~~~^^^^^^^^
+json.decoder.JSONDecodeError: Illegal trailing comma before end of array: line 11 column 39 (char 400)
+
+==================================================
+Traceback (most recent call last):
+  File "/data/data/com.termux/files/home/NewsPulse100-Automation/main.py", line 46, in <module>
+    query=result["image_prompt"],
+          ~~~~~~^^^^^^^^^^^^^^^^
+KeyError: 'image_prompt'
+
+==================================================
+Traceback (most recent call last):
+  File "/data/data/com.termux/files/home/NewsPulse100-Automation/main.py", line 54, in <module>
+    poster_path = generate_poster(
+        headline=result["poster_headline"],
+    ...<3 lines>...
+        output_path=str(poster_path)
+    )
+  File "/data/data/com.termux/files/home/NewsPulse100-Automation/modules/poster/generator_v2.py", line 441, in generate_poster
+    bg = prepare_background(
+        image_path
+    )
+  File "/data/data/com.termux/files/home/NewsPulse100-Automation/modules/poster/generator_v2.py", line 247, in prepare_background
+    img = Image.open(
+          ~~~~~~~~~~^
+        image_path
+        ^^^^^^^^^^
+    ).convert("RGB")
+    ^
+  File "/data/data/com.termux/files/usr/lib/python3.13/site-packages/PIL/Image.py", line 3711, in open
+    raise UnidentifiedImageError(msg)
+PIL.UnidentifiedImageError: cannot identify image file 'output/2026-08-02/Students/news_image.jpg'
+
+==================================================
+Traceback (most recent call last):
+  File "/data/data/com.termux/files/home/NewsPulse100-Automation/main.py", line 46, in <module>
+    query=result["image_prompt"],
+          ~~~~~~^^^^^^^^^^^^^^^^
+TypeError: 'NoneType' object is not subscriptable
+
+==================================================
+Traceback (most recent call last):
+  File "/data/data/com.termux/files/home/NewsPulse100-Automation/main.py", line 46, in <module>
+    query=result["image_prompt"],
+          ~~~~~~^^^^^^^^^^^^^^^^
+TypeError: 'NoneType' object is not subscriptable
+
+==================================================
+Traceback (most recent call last):
+  File "/data/data/com.termux/files/usr/lib/python3.13/site-packages/urllib3/connectionpool.py", line 464, in _make_request
+    self._validate_conn(conn)
+    ~~~~~~~~~~~~~~~~~~~^^^^^^
+  File "/data/data/com.termux/files/usr/lib/python3.13/site-packages/urllib3/connectionpool.py", line 1106, in _validate_conn
+    conn.connect()
+    ~~~~~~~~~~~~^^
+  File "/data/data/com.termux/files/usr/lib/python3.13/site-packages/urllib3/connection.py", line 796, in connect
+    sock_and_verified = _ssl_wrap_socket_and_match_hostname(
+        sock=sock,
+    ...<14 lines>...
+        assert_fingerprint=self.assert_fingerprint,
+    )
+  File "/data/data/com.termux/files/usr/lib/python3.13/site-packages/urllib3/connection.py", line 975, in _ssl_wrap_socket_and_match_hostname
+    ssl_sock = ssl_wrap_socket(
+        sock=sock,
+    ...<8 lines>...
+        tls_in_tls=tls_in_tls,
+    )
+  File "/data/data/com.termux/files/usr/lib/python3.13/site-packages/urllib3/util/ssl_.py", line 433, in ssl_wrap_socket
+    ssl_sock = _ssl_wrap_socket_impl(sock, context, tls_in_tls, server_hostname)
+  File "/data/data/com.termux/files/usr/lib/python3.13/site-packages/urllib3/util/ssl_.py", line 477, in _ssl_wrap_socket_impl
+    return ssl_context.wrap_socket(sock, server_hostname=server_hostname)
+           ~~~~~~~~~~~~~~~~~~~~~~~^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/data/data/com.termux/files/usr/lib/python3.13/ssl.py", line 455, in wrap_socket
+    return self.sslsocket_class._create(
+           ~~~~~~~~~~~~~~~~~~~~~~~~~~~~^
+        sock=sock,
+        ^^^^^^^^^^
+    ...<5 lines>...
+        session=session
+        ^^^^^^^^^^^^^^^
+    )
+    ^
+  File "/data/data/com.termux/files/usr/lib/python3.13/ssl.py", line 1076, in _create
+    self.do_handshake()
+    ~~~~~~~~~~~~~~~~~^^
+  File "/data/data/com.termux/files/usr/lib/python3.13/ssl.py", line 1372, in do_handshake
+    self._sslobj.do_handshake()
+    ~~~~~~~~~~~~~~~~~~~~~~~~~^^
+ssl.SSLEOFError: [SSL: UNEXPECTED_EOF_WHILE_READING] EOF occurred in violation of protocol (_ssl.c:1032)
+
+During handling of the above exception, another exception occurred:
+
+Traceback (most recent call last):
+  File "/data/data/com.termux/files/usr/lib/python3.13/site-packages/urllib3/connectionpool.py", line 788, in urlopen
+    response = self._make_request(
+        conn,
+    ...<10 lines>...
+        **response_kw,
+    )
+  File "/data/data/com.termux/files/usr/lib/python3.13/site-packages/urllib3/connectionpool.py", line 488, in _make_request
+    raise new_e
+urllib3.exceptions.SSLError: [SSL: UNEXPECTED_EOF_WHILE_READING] EOF occurred in violation of protocol (_ssl.c:1032)
+
+The above exception was the direct cause of the following exception:
+
+Traceback (most recent call last):
+  File "/data/data/com.termux/files/usr/lib/python3.13/site-packages/requests/adapters.py", line 696, in send
+    resp = conn.urlopen(
+        method=request.method,
+    ...<9 lines>...
+        chunked=chunked,
+    )
+  File "/data/data/com.termux/files/usr/lib/python3.13/site-packages/urllib3/connectionpool.py", line 842, in urlopen
+    retries = retries.increment(
+        method, url, error=new_e, _pool=self, _stacktrace=sys.exc_info()[2]
+    )
+  File "/data/data/com.termux/files/usr/lib/python3.13/site-packages/urllib3/util/retry.py", line 543, in increment
+    raise MaxRetryError(_pool, url, reason) from reason  # type: ignore[arg-type]
+    ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+urllib3.exceptions.MaxRetryError: HTTPSConnectionPool(host='api.groq.com', port=443): Max retries exceeded with url: /openai/v1/chat/completions (Caused by SSLError(SSLEOFError(8, '[SSL: UNEXPECTED_EOF_WHILE_READING] EOF occurred in violation of protocol (_ssl.c:1032)')))
+
+During handling of the above exception, another exception occurred:
+
+Traceback (most recent call last):
+  File "/data/data/com.termux/files/home/NewsPulse100-Automation/main.py", line 42, in <module>
+    result = process_article(best_news, category)
+  File "/data/data/com.termux/files/home/NewsPulse100-Automation/modules/ai/processor.py", line 23, in process_article
+    response = ask_groq(prompt)
+  File "/data/data/com.termux/files/home/NewsPulse100-Automation/modules/ai/client.py", line 39, in ask_groq
+    response = requests.post(URL, headers=headers, json=body, timeout=60)
+  File "/data/data/com.termux/files/usr/lib/python3.13/site-packages/requests/api.py", line 134, in post
+    return request("post", url, data=data, json=json, **kwargs)
+  File "/data/data/com.termux/files/usr/lib/python3.13/site-packages/requests/api.py", line 71, in request
+    return session.request(method=method, url=url, **kwargs)
+           ~~~~~~~~~~~~~~~^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/data/data/com.termux/files/usr/lib/python3.13/site-packages/requests/sessions.py", line 651, in request
+    resp = self.send(prep, **send_kwargs)
+  File "/data/data/com.termux/files/usr/lib/python3.13/site-packages/requests/sessions.py", line 784, in send
+    r = adapter.send(request, **kwargs)
+  File "/data/data/com.termux/files/usr/lib/python3.13/site-packages/requests/adapters.py", line 727, in send
+    raise SSLError(e, request=request)
+requests.exceptions.SSLError: HTTPSConnectionPool(host='api.groq.com', port=443): Max retries exceeded with url: /openai/v1/chat/completions (Caused by SSLError(SSLEOFError(8, '[SSL: UNEXPECTED_EOF_WHILE_READING] EOF occurred in violation of protocol (_ssl.c:1032)')))
+
+==================================================
+Traceback (most recent call last):
+  File "/data/data/com.termux/files/home/NewsPulse100-Automation/main.py", line 69, in <module>
+    seo = generate_seo(
+        result["headline_hindi"],
+        result["summary_hindi"],
+        category
+    )
+  File "/data/data/com.termux/files/home/NewsPulse100-Automation/modules/seo/generator.py", line 70, in generate_seo
+    return json.loads(text)
+           ~~~~~~~~~~^^^^^^
+  File "/data/data/com.termux/files/usr/lib/python3.13/json/__init__.py", line 352, in loads
+    return _default_decoder.decode(s)
+           ~~~~~~~~~~~~~~~~~~~~~~~^^^
+  File "/data/data/com.termux/files/usr/lib/python3.13/json/decoder.py", line 345, in decode
+    obj, end = self.raw_decode(s, idx=_w(s, 0).end())
+               ~~~~~~~~~~~~~~~^^^^^^^^^^^^^^^^^^^^^^^
+  File "/data/data/com.termux/files/usr/lib/python3.13/json/decoder.py", line 361, in raw_decode
+    obj, end = self.scan_once(s, idx)
+               ~~~~~~~~~~~~~~^^^^^^^^
+json.decoder.JSONDecodeError: Expecting ':' delimiter: line 5 column 22 (char 318)
+
+==================================================
+Traceback (most recent call last):
+  File "/data/data/com.termux/files/home/NewsPulse100-Automation/main.py", line 69, in <module>
+    seo = generate_seo(
+        result["headline_hindi"],
+        result["summary_hindi"],
+        category
+    )
+  File "/data/data/com.termux/files/home/NewsPulse100-Automation/modules/seo/generator.py", line 70, in generate_seo
+    return json.loads(text)
+           ~~~~~~~~~~^^^^^^
+  File "/data/data/com.termux/files/usr/lib/python3.13/json/__init__.py", line 352, in loads
+    return _default_decoder.decode(s)
+           ~~~~~~~~~~~~~~~~~~~~~~~^^^
+  File "/data/data/com.termux/files/usr/lib/python3.13/json/decoder.py", line 345, in decode
+    obj, end = self.raw_decode(s, idx=_w(s, 0).end())
+               ~~~~~~~~~~~~~~~^^^^^^^^^^^^^^^^^^^^^^^
+  File "/data/data/com.termux/files/usr/lib/python3.13/json/decoder.py", line 361, in raw_decode
+    obj, end = self.scan_once(s, idx)
+               ~~~~~~~~~~~~~~^^^^^^^^
+json.decoder.JSONDecodeError: Invalid control character at: line 4 column 13 (char 306)
+
+==================================================
+Traceback (most recent call last):
+  File "/data/data/com.termux/files/home/NewsPulse100-Automation/main.py", line 28, in <module>
+    best_index = select_best_news(news_list)
+  File "/data/data/com.termux/files/home/NewsPulse100-Automation/modules/news/select_best.py", line 20, in select_best_news
+    response = ask_groq(prompt)
+  File "/data/data/com.termux/files/home/NewsPulse100-Automation/modules/ai/client.py", line 44, in ask_groq
+    response.raise_for_status()
+    ~~~~~~~~~~~~~~~~~~~~~~~~~^^
+  File "/data/data/com.termux/files/usr/lib/python3.13/site-packages/requests/models.py", line 1167, in raise_for_status
+    raise HTTPError(http_error_msg, response=self)
+requests.exceptions.HTTPError: 400 Client Error: Bad Request for url: https://api.groq.com/openai/v1/chat/completions
+
+==================================================

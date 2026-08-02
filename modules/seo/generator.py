@@ -1,13 +1,10 @@
 from dotenv import load_dotenv
 import os
-
-load_dotenv()
-
-GROQ_API_KEY = os.getenv("GROQ_API_KEY")
 import json
 import requests
-import os
+import re
 
+load_dotenv()
 
 GROQ_API_KEY = os.getenv("GROQ_API_KEY")
 
@@ -21,19 +18,23 @@ Headline: {headline}
 Summary: {summary}
 Category: {category}
 
-Return ONLY raw JSON.
+Return ONLY valid JSON.
 
-Do NOT use markdown.
-Do NOT wrap the response in ```json.
-Do NOT add any explanation.
-Return 10 hashtags.
-5 hashtags must be in English.
-5 hashtags must be in Hindi.
+Rules:
+1. Do not use markdown.
+2. Do not wrap the response in ```json.
+3. Return only JSON.
+4. Description should be 30-50 words.
+5. Return exactly 10 hashtags.
+6. First 5 hashtags in English.
+7. Last 5 hashtags in Hindi.
+
+Format:
 
 {{
-"title":"",
-"description":"",
-"hashtags":[]
+    "title": "",
+    "description": "",
+    "hashtags": []
 }}
 """
 
@@ -45,26 +46,57 @@ Return 10 hashtags.
         },
         json={
             "model": "llama-3.3-70b-versatile",
+            "temperature": 0.1,
             "messages": [
                 {
                     "role": "user",
                     "content": prompt
                 }
             ]
-        }
+        },
+        timeout=60
     )
+
+    response.raise_for_status()
+
     text = response.json()["choices"][0]["message"]["content"]
-    text = text.strip()
 
-    if text.startswith("```json"):
-        text = text.replace("```json", "", 1)
+    # Clean response
+    text = (
+        text.replace("```json", "")
+            .replace("```", "")
+            .replace("\r", " ")
+            .replace("\t", " ")
+            .strip()
+    )
 
-    if text.startswith("```"):
-        text = text.replace("```", "", 1)
+    # Extract JSON only
+    start = text.find("{")
+    end = text.rfind("}") + 1
 
-    if text.endswith("```"):
-        text = text[:-3]
+    if start != -1 and end != -1:
+        text = text[start:end]
 
-    text = text.strip()
+    # Repair common JSON issues
+    text = re.sub(r",\s*}", "}", text)
+    text = re.sub(r",\s*]", "]", text)
 
-    return json.loads(text)
+    try:
+        seo = json.loads(text)
+
+        seo.setdefault("title", headline)
+        seo.setdefault("description", summary)
+        seo.setdefault("hashtags", [])
+
+        return seo
+
+    except Exception as e:
+        print("❌ SEO JSON Error")
+        print(text)
+        print(e)
+
+        return {
+            "title": headline,
+            "description": summary,
+            "hashtags": []
+        }

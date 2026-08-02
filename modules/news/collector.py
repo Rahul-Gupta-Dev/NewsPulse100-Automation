@@ -12,11 +12,38 @@ from modules.news.cleaner import clean_article
 
 
 CATEGORIES = {
-    "politics": "politics government parliament election",
-    "students": "student education school college jee neet ugc cbse",
-    "jobs": "government jobs vacancy recruitment ssc upsc railway",
-    "business": "business economy stock market gold silver",
-    "agriculture": "farmer agriculture crop monsoon weather"
+    "politics": [
+        "politics",
+        "government",
+        "parliament",
+        "election"
+    ],
+    "students": [
+        "education",
+        "jee",
+        "neet",
+        "ugc",
+        "cbse"
+    ],
+    "jobs": [
+        "government jobs",
+        "ssc",
+        "upsc",
+        "railway recruitment"
+    ],
+    "business": [
+        "business",
+        "economy",
+        "stock market",
+        "startup"
+    ],
+    "sports": [
+        "cricket",
+        "football",
+        "tennis",
+        "olympics",
+        "sports"
+    ]
 }
 
 
@@ -32,12 +59,6 @@ def collect_news():
             collected[category] = [clean_article(n) for n in news]
 
         else:
-            collected[category] = {
-                "title": "No news found",
-                "summary": "",
-                "link": "",
-                "published": "",
-                "source": ""
-            }
+            collected[category] = []
 
     return collected

@@ -1,20 +1,42 @@
+import os
 import requests
-import urllib.parse
+
+FAL_KEY = os.getenv("FAL_KEY")
+
+URL = "https://fal.run/fal-ai/flux/dev"
 
 
-def generate_image(prompt, output_path="output/news_image.jpg"):
-    prompt = urllib.parse.quote(prompt)
+def generate_image(prompt, output_path):
 
-    url = f"https://image.pollinations.ai/prompt/{prompt}"
+    headers = {
+        "Authorization": f"Key {FAL_KEY}",
+        "Content-Type": "application/json"
+    }
 
-    response = requests.get(url)
+    payload = {
+        "prompt": prompt,
+        "image_size": "portrait_4_3",
+        "num_images": 1,
+        "enable_safety_checker": True
+    }
 
-    if response.status_code == 200:
-        with open(output_path, "wb") as f:
-            f.write(response.content)
+    print("Generating image...")
 
-        print("✅ Image Saved:", output_path)
-        return output_path
+    r = requests.post(URL, headers=headers, json=payload, timeout=300)
 
-    print("❌ Image Generation Failed")
-    return None
+    if r.status_code != 200:
+        print(r.text)
+        raise Exception("Image generation failed")
+
+    result = r.json()
+
+    image_url = result["images"][0]["url"]
+
+    img = requests.get(image_url)
+
+    with open(output_path, "wb") as f:
+        f.write(img.content)
+
+    print("✅ Image Saved:", output_path)
+
+    return output_path

@@ -11,7 +11,7 @@ def add_bottom_gradient(img, height_ratio=0.50):
 
     for y in range(fade_height):
 
-        alpha = int(255 * (y / fade_height))
+        alpha = int(255 * min(1.0, (y / fade_height) * 1.7))
 
         gradient.putpixel((0, y), alpha)
 

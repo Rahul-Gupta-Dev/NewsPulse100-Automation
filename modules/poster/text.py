@@ -13,6 +13,28 @@ def get_font(size, bold=False):
         "fonts/NotoSansDevanagari-Regular.ttf",
         size
     )
+def get_hindi_font(size, bold=False):
+    if bold:
+        return ImageFont.truetype(
+            "fonts/NotoSansDevanagari-Bold.ttf",
+            size
+        )
+    return ImageFont.truetype(
+        "fonts/NotoSansDevanagari-Regular.ttf",
+        size
+    )
+
+
+def get_english_font(size, bold=False):
+    if bold:
+        return ImageFont.truetype(
+            "fonts/DejaVuSans-Bold.ttf",
+            size
+        )
+    return ImageFont.truetype(
+    "fonts/DejaVuSans-Bold.ttf",
+    size
+)
 
 
 def wrap_text(text, font, max_width, draw):

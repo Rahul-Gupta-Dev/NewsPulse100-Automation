@@ -1,3 +1,5 @@
+import os
+
 OUTPUT_FOLDER = "output"
 
 MAX_RETRIES = 3
@@ -10,3 +12,4 @@ IMAGE_HEIGHT = 1350
 
 VIDEO_DURATION = 15
 FPS = 30
+HF_API_KEY = os.getenv("HF_API_KEY")

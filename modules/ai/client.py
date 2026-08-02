@@ -33,7 +33,7 @@ def ask_groq(prompt):
                 "content": prompt
             }
         ],
-        "temperature": 0.3
+        "temperature": 0.1
     }
 
     response = requests.post(URL, headers=headers, json=body, timeout=60)
