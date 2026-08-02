@@ -1,1 +1,6 @@
 .env
+output/
+__pycache__/
+*.pyc
+error.log
+.env
