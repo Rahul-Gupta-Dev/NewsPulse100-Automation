@@ -8,6 +8,8 @@ load_dotenv()
 
 GROQ_API_KEY = os.getenv("GROQ_API_KEY")
 
+MODEL = "openai/gpt-oss-120b"
+
 
 def generate_seo(headline, summary, category):
 
@@ -45,7 +47,7 @@ Format:
             "Content-Type": "application/json"
         },
         json={
-            "model": "llama-3.3-70b-versatile",
+            "model": MODEL,
             "temperature": 0.1,
             "messages": [
                 {

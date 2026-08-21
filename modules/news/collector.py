@@ -1,10 +1,6 @@
 """
-collector.py
-
-Collect one best news article from each category.
-
-Author: Rahul Gupta
-Project: NewsPulse100 Automation
+News Collector
+NewsPulse100 Automation
 """
 
 from modules.news.rss import fetch_news
@@ -13,52 +9,76 @@ from modules.news.cleaner import clean_article
 
 CATEGORIES = {
     "politics": [
-        "politics",
-        "government",
-        "parliament",
-        "election"
+        "India politics government parliament",
+        "India government latest news",
+        "India parliament latest",
     ],
+
     "students": [
-        "education",
-        "jee",
-        "neet",
-        "ugc",
-        "cbse"
+        "India education students latest",
+        "India school college university latest",
+        "JEE NEET UGC CBSE latest",
     ],
+
     "jobs": [
-        "government jobs",
-        "ssc",
-        "upsc",
-        "railway recruitment"
+        "India government jobs latest",
+        "India recruitment vacancy latest",
+        "SSC UPSC railway jobs latest",
     ],
+
     "business": [
-        "business",
-        "economy",
-        "stock market",
-        "startup"
+        "India business economy latest",
+        "India stock market economy latest",
+        "India companies corporate latest",
     ],
+
     "sports": [
-        "cricket",
-        "football",
-        "tennis",
-        "olympics",
-        "sports"
+        "India cricket latest",
+        "India sports latest",
+        "Indian cricket team latest",
+    ],
+
+    "national": [
+        "India latest news",
+        "India breaking news",
+        "India major news today",
+    ],
+
+    "weather": [
+        "India weather flood rain latest",
+        "India flood latest",
+        "India monsoon latest",
+    ],
+
+    "science": [
+        "India science technology latest",
+        "ISRO India latest",
+        "India research technology latest",
     ]
 }
 
 
 def collect_news():
 
-    collected = {}
+    collected = []
 
-    for category, query in CATEGORIES.items():
+    for category, queries in CATEGORIES.items():
 
-        news = fetch_news(query, limit=10)
+        for query in queries:
 
-        if news:
-            collected[category] = [clean_article(n) for n in news]
+            try:
+                news = fetch_news(query, limit=10)
 
-        else:
-            collected[category] = []
+                for article in news:
+
+                    article = clean_article(article)
+
+                    article["category"] = category
+
+                    collected.append(article)
+
+            except Exception as e:
+                print(f"⚠️ Failed query: {query}")
+                print(e)
 
     return collected

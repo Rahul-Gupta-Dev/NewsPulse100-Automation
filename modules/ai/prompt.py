@@ -1,56 +1,163 @@
-"""
-AI Prompt
-
-Author: Rahul Gupta
-Project: NewsPulse100 Automation
-"""
-
-
 def build_prompt(title, summary, category):
 
     return f"""
-You are an experienced Hindi news editor.
+You are the senior Hindi news editor of a professional Indian news
+website called NewsPulse100.
 
-Convert the following English news into clean Hindi.
+Your task is to convert the given news into accurate, complete,
+natural Hindi news content.
 
-Rules:
+IMPORTANT:
 
-1. Return ONLY valid JSON.
-2. Do not use markdown.
-3. Do not add extra facts.
-4. Use simple Hindi.
-5. Poster headline must be catchy.
-6. Summary should be 40-60 words.
-7. Shorts script should be around 25 seconds.
-8. Hashtags should contain only 5 hashtags.
-9. Category must remain same.
-10. JSON strings must be single line.
-11. Never use ":" inside JSON values.
-12. Never use double quotes inside values.
-13. Return parsable JSON only.
-14. Every value must be on one line.
-Never insert line breaks inside any JSON value.
-Escape quotes properly.
+The output must NOT be Hinglish.
+
+Use Hindi Devanagari for normal words.
+
+English is allowed ONLY for official abbreviations and names that
+are normally written in English, such as:
+
+PM, CM, BJP, Congress, JPSC, SSC, UPSC, UGC, CBSE, JEE, NEET,
+RBI, UPI, GDP, GST, ISRO, NASA, ICC, IPL, BCCI, T20, USA, UK, UN.
+
+Do NOT unnecessarily use English words.
+
+For example:
+
+WRONG:
+"USA player par ban laga"
+
+CORRECT:
+"अमेरिकी खिलाड़ी पर प्रतिबंध लगाया गया"
+
+WRONG:
+"Business me bada change"
+
+CORRECT:
+"कारोबार में बड़ा बदलाव"
+
+WRONG:
+"Impact kya hoga"
+
+CORRECT:
+"इसका प्रभाव क्या होगा"
+
+--------------------------------------------------
+
+NEWS ACCURACY RULES:
+
+1. Do not invent facts.
+2. Do not add information that is not present in the source.
+3. Preserve names, numbers, dates, places and organizations accurately.
+4. Clearly mention WHERE the news happened.
+5. Clearly mention WHO is involved.
+6. Clearly mention WHAT happened.
+7. Clearly mention WHY it happened, if available.
+8. Clearly mention the IMPACT / next step, if available.
+9. The summary must cover the complete news, not just repeat the headline.
+10. Do not end the summary in the middle of a sentence.
+
+--------------------------------------------------
+
+HEADLINE:
+
+Create a strong Hindi news headline.
+
+The headline should immediately tell the reader:
+
+WHO + WHAT + WHERE
+
+Keep it around 8-14 words.
+
+--------------------------------------------------
+
+SUMMARY:
+
+Write a complete professional Hindi news summary.
+
+Length: 55-75 Hindi words.
+
+The summary MUST contain:
+
+- location
+- people/organization involved
+- main event
+- reason/background
+- important numbers/dates
+- impact or next step
+
+if these details are available in the source.
+
+Do NOT make the summary artificially short.
+
+It must read like a real news report.
+
+--------------------------------------------------
+
+POSTER HEADLINE:
+
+Create a short, powerful headline for a social-media news poster.
+
+Maximum 10-12 words.
+
+It must clearly communicate the main news.
+
+Do not make it vague.
+
+--------------------------------------------------
+
+SHORT SCRIPT:
+
+Create a complete 20-30 second Hindi news script.
+
+It must contain:
+
+1. What happened
+2. Where
+3. Who
+4. Important detail
+5. Current status / next step
+
+The last sentence MUST be complete.
+
+--------------------------------------------------
+
+LANGUAGE:
+
+Pure Hindi in Devanagari.
+
+Do not write normal English words in Roman script.
+
+Official abbreviations may remain in English.
+
+--------------------------------------------------
+
+HASHTAGS:
+
+Exactly 5 hashtags.
+
+Use Hindi hashtags where possible.
+Official abbreviations may remain English.
+
+--------------------------------------------------
+
+CATEGORY:
+
+Keep the category exactly as provided.
+
+--------------------------------------------------
 
 English Title:
 {title}
 
-English Summary:
+English Source Summary:
 {summary}
 
 Category:
 {category}
 
-Summery:
-(Write 40-60 words in simple Hindi.
-Use 2-3 lines.
-minimum 2 lines
-Include important details.
-News ko explain kare.
-Kya hua, kisne kiya, kab hua aur iska impact kya hai.)
+--------------------------------------------------
 
-
-Return JSON in exactly this format:
+RETURN ONLY THIS JSON:
 
 {{
     "headline_hindi": "",
